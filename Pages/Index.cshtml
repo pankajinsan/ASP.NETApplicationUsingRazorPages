@@ -1,0 +1,119 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+@{
+  var userId = @Accessor.HttpContext.Session.GetString("userId");
+  }
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+@{
+
+    if (userId != null)
+    {
+        <p>
+            <a asp-page="/Add" class="btn btn-dark">Create New</a>
+        </p>
+
+    }
+}
+@using (Html.BeginForm(FormMethod.Post))
+{
+<div class="row">
+    <div class="col-md-2"><span>PropertyID:</span> @Html.TextBox("Property_ID","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>PropertyName:</span> @Html.TextBox("Property_Name","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>GMName:</span> @Html.TextBox("GM_Name","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>StreetAddress:</span> @Html.TextBox("Street_Address","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>CityAddress:</span> @Html.TextBox("City_Address","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>State:</span> @Html.TextBox("State","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>Country:</span> @Html.TextBox("Country","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span>Zipcode:</span> @Html.TextBox("Zipcode","",new { @class= "form-control"})</div>
+    <div class="col-md-2"><span></span><br /><input type="submit" class="btn btn-primary" value="Search" /></div>
+</div>
+ <br /><br/>
+    <table class="table" style="word-break: break-all;">
+    <tr>
+        <th style="display:none">
+            ID
+        </th>
+        <th>
+                Property_ID
+        </th>
+        <th>
+           Property_Name
+        </th>
+        <th>
+            GM_Name
+        </th>
+        <th>
+            Street_Address
+        </th>
+        <th> City_Address</th>
+        <th> State</th>
+        <th> Country</th>
+        <th> Zipcode</th>
+        <th></th>
+    </tr>
+    @if (Model.productList.Count() == 0)
+        {
+
+            <tr>
+                <td colspan="5">
+                    No record found
+                </td>
+            </tr>
+
+        }
+        else
+        {
+        @foreach (var item in Model.productList)
+    {
+        <tr>
+            <td style="display:none">
+                        @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.Property_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GM_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street_Address)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.City_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zipcode)
+            </td>
+            
+            <td>
+                        
+                            @if (userId != null)
+                            {
+                <a asp-page="/Edit" asp-route-id="@item.ID" class="btn btn-info">Edit</a>
+                      <button type="submit"  asp-page-handler="Delete" asp-route-id="@item.ID" class="btn btn-danger" onclick="return confirm('Are sure wants to delete?');">Delete</button>
+                            }
+            </td>
+        </tr>
+    }
+}    
+</table>
+}

@@ -1,0 +1,104 @@
+﻿@page "{Id:int}"
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@model CRUDApplicationUsingRazorPages.Pages.EditModel
+@{
+    ViewData["Title"] = "Product Edit Page";
+}
+@{
+
+    var userId = @Accessor.HttpContext.Session.GetString("userId");
+    if (userId == null)
+    {
+        { Response.Redirect("/"); }
+
+    }
+}
+<h2>Edit</h2>
+
+<form method="post">
+    <div class="form-horizontal">
+        <h4>Customer Information:</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" style="display:none">
+            <label asp-for="customer.ID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.ID" class="form-control" />
+                <span asp-validation-for="customer.ID" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.Property_ID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.Property_ID" class="form-control" />
+                <span asp-validation-for="customer.Property_ID" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.Property_Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.Property_Name" class="form-control" />
+                <span asp-validation-for="customer.Property_Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.GM_Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.GM_Name" class="form-control" />
+                <span asp-validation-for="customer.GM_Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.Street_Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.Street_Address" class="form-control" />
+                <span asp-validation-for="customer.Street_Address" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.City_Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.City_Address" class="form-control" />
+                <span asp-validation-for="customer.City_Address" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.State" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.State" class="form-control" />
+                <span asp-validation-for="customer.State" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.Country" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.Country" class="form-control" />
+                <span asp-validation-for="customer.Country" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="customer.Zipcode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="customer.Zipcode" class="form-control" />
+                <span asp-validation-for="customer.Zipcode" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-page="/Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,71 @@
+﻿@page
+@model CRUDApplicationUsingRazorPages.Pages.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+@*<h2>Login</h2>*@
+<html>
+<meta name="viewport" content="width=device-width" />
+<head>
+
+    <style type="text/css">
+        body {
+            overflow: hidden;
+        }
+    </style>
+
+
+</head>
+</html>
+<section class="vh-100 gradient-custom" style="margin-top:-50px;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <form method="post">
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Please enter your username and password!</p>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-outline form-white mb-4">
+                                    <input name="Username" type="text" id="Username" class="form-control form-control-lg" required placeholder="Username" />
+                                    <span asp-validation-for="login.Username" class="text-danger"></span>
+                                   
+                               </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input name="Password" type="password" id="Password" class="form-control form-control-lg" required placeholder="Password" />
+                                    <span asp-validation-for="login.Password" class="text-danger"></span>
+                                    
+                                </div>
+
+
+
+                                <button id="btnSubmit" class="btn btn-outline-light btn-lg px-5" type="submit" data-spinning-button>Login</button>
+
+                            </form>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@{
+    if (TempData["msg"] != null)
+    {
+        <script>
+            alert('@TempData["msg"]')
+        </script>
+    }
+
+}
